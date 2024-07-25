@@ -1,7 +1,14 @@
 // src/app/page.tsx
 import Header from '../components/Header'
 import UserProfile from '../components/UserProfile'
-import SocialLink from '../components/SocialLink'
+import SocialLinkList from '@/components/SocialLinkList'
+import { SocialLink } from '@/types/types'
+
+const links: SocialLink[] = [
+	{ id: '1', url: 'https://twitter.com', title: 'Twitter' },
+	{ id: '2', url: 'https://linkedin.com', title: 'LinkedIn' },
+	{ id: '3', url: 'https://github.com', title: 'GitHub' },
+]
 
 export default function Home() {
 	return (
@@ -14,9 +21,7 @@ export default function Home() {
 						bio='Frontend Developer | React Enthusiast'
 						avatarUrl='https://via.placeholder.com/150'
 					/>
-					<SocialLink url='https://twitter.com' title='Twitter' />
-					<SocialLink url='https://linkedin.com' title='LinkedIn' />
-					<SocialLink url='https://github.com' title='GitHub' />
+					<SocialLinkList links={links} />
 				</div>
 			</div>
 		</main>
