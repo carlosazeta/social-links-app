@@ -27,14 +27,14 @@ export default function AddLinkForm({ onAddLink }: AddLinkFormProps) {
 				value={title}
 				onChange={(e) => setTitle(e.target.value)}
 				placeholder='Link title'
-				className='w-full p-2 mb-2 border rounded'
+				className='w-full p-2 mb-2 border rounded text-black'
 			/>
 			<input
 				type='url'
 				value={url}
 				onChange={(e) => setUrl(e.target.value)}
 				placeholder='https://example.com'
-				className='w-full p-2 mb-2 border rounded'
+				className='w-full p-2 mb-2 border rounded text-black'
 			/>
 			<button
 				type='submit'

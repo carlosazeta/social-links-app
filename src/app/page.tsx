@@ -23,6 +23,13 @@ export default function Home() {
 	const deleteLink = (id: string) => {
 		setLinks(links.filter((link) => link.id !== id))
 	}
+
+	const editLink = (updatedLink: SocialLink) => {
+		setLinks(
+			links.map((link) => (link.id === updatedLink.id ? updatedLink : link))
+		)
+	}
+
 	return (
 		<main className='min-h-screen flex flex-col'>
 			<Header />
@@ -34,7 +41,11 @@ export default function Home() {
 						avatarUrl='https://via.placeholder.com/150'
 					/>
 					<AddLinkForm onAddLink={addLink} />
-					<SocialLinkList links={links} onDelete={deleteLink} />
+					<SocialLinkList
+						links={links}
+						onDelete={deleteLink}
+						onEdit={editLink}
+					/>
 				</div>
 			</div>
 		</main>
