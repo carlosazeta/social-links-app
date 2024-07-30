@@ -1,7 +1,11 @@
+// src/components/AddLinkForm.tsx
 'use client'
 
 import { useState } from 'react'
-import { SocialLink } from '@/types/types'
+import { SocialLink } from '../types/types'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { normalizeUrl } from '../utils/urlUtils'
 
 type AddLinkFormProps = {
 	onAddLink: (link: Omit<SocialLink, 'id'>) => void
@@ -14,34 +18,32 @@ export default function AddLinkForm({ onAddLink }: AddLinkFormProps) {
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		if (title && url) {
-			onAddLink({ title, url })
+			const normalizedUrl = normalizeUrl(url)
+			onAddLink({ title, url: normalizedUrl })
 			setTitle('')
 			setUrl('')
 		}
 	}
 
 	return (
-		<form onSubmit={handleSubmit} className='mb-4'>
-			<input
+		<form onSubmit={handleSubmit} className='space-y-4 mb-6'>
+			<Input
 				type='text'
 				value={title}
 				onChange={(e) => setTitle(e.target.value)}
-				placeholder='Link title'
-				className='w-full p-2 mb-2 border rounded text-black'
+				placeholder='Link Title'
+				required
 			/>
-			<input
-				type='url'
+			<Input
+				type='text'
 				value={url}
 				onChange={(e) => setUrl(e.target.value)}
-				placeholder='https://example.com'
-				className='w-full p-2 mb-2 border rounded text-black'
+				placeholder='URL'
+				required
 			/>
-			<button
-				type='submit'
-				className='w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600'
-			>
+			<Button type='submit' className='w-full'>
 				Add Link
-			</button>
+			</Button>
 		</form>
 	)
 }
