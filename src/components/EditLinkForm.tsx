@@ -1,7 +1,11 @@
+// src/components/EditLinkForm.tsx
 'use client'
 
 import { useState } from 'react'
-import { SocialLink } from '@/types/types'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { SocialLink } from '../types/types'
+import { normalizeUrl } from '../utils/urlUtils'
 
 type EditLinkFormProps = {
 	link: SocialLink
@@ -20,39 +24,32 @@ export default function EditLinkForm({
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		if (title && url) {
-			onSave({ ...link, title, url })
+			const normalizedUrl = normalizeUrl(url)
+			onSave({ ...link, title, url: normalizedUrl })
 		}
 	}
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<input
+		<form onSubmit={handleSubmit} className='space-y-4'>
+			<Input
 				type='text'
 				value={title}
 				onChange={(e) => setTitle(e.target.value)}
-				className='w-full p-2 mb-2 border rounded color text-black'
+				placeholder='Link Title'
+				required
 			/>
-
-			<input
-				type='url'
+			<Input
+				type='text'
 				value={url}
 				onChange={(e) => setUrl(e.target.value)}
-				className='w-full p-2 mb-2 border rounded text-black'
+				placeholder='URL'
+				required
 			/>
-			<div className='flex justify-between'>
-				<button
-					type='submit'
-					className='p-2 bg-green-500 text-white rounded hover:bg-green-600'
-				>
-					Save
-				</button>
-				<button
-					type='button'
-					onClick={onCancel}
-					className='p-2 bg-gray-500 text-white rounded hover:bg-gray-600'
-				>
+			<div className='flex justify-end space-x-2'>
+				<Button type='button' variant='outline' onClick={onCancel}>
 					Cancel
-				</button>
+				</Button>
+				<Button type='submit'>Save</Button>
 			</div>
 		</form>
 	)

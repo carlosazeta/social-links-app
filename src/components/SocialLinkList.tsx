@@ -1,16 +1,17 @@
-import { SocialLink as SocialLinkType } from '@/types/types'
+// src/components/SocialLinkList.tsx
+import { SocialLink as SocialLinkType } from '../types/types'
 import SocialLink from './SocialLink'
 
 type SocialLinkListProps = {
 	links: SocialLinkType[]
-	onDelete: (id: string) => void
 	onEdit: (updatedLink: SocialLinkType) => void
+	onDelete: (id: string) => void
 }
 
 export default function SocialLinkList({
 	links,
-	onDelete,
 	onEdit,
+	onDelete,
 }: SocialLinkListProps) {
 	return (
 		<div className='w-full'>
@@ -18,8 +19,8 @@ export default function SocialLinkList({
 				<SocialLink
 					key={link.id}
 					link={link}
-					onDelete={onDelete}
 					onEdit={onEdit}
+					onDelete={onDelete}
 				/>
 			))}
 		</div>
